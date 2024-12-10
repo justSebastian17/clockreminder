@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UFT-8">
+    <title>Reminder</title>
+    <style>    
+        .centerDiv {
+            margin: 0; /* Hilangkan margin bawaan */
+            height: 98vh; /* Tinggi body penuh layar */
+            display: flex; /* Aktifkan Flexbox */
+            justify-content: center; /* Pusatkan horizontal */
+            align-items: center; /* Pusatkan vertikal */
+            background-color: #f0f0f0; /* Latar belakang tambahan */
+        }
+        .lingkaran1{
+            width: 450px;
+            height: 450px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            background: #dac52c;
+            border-radius: 100%;            
+        }
+    </style>
+</head>
+<body>    
+    <div class="centerDiv">
+        <div class="lingkaran1">
+            <h1 id="clockPanel"></h1>
+            <p id="notif" style="font-size: 30px;"></p>    
+        </div>
+    </div>	
+    <script language="javascript" type="text/javascript">
+        const clockPanel = document.getElementById("clockPanel");
+        const p = document.getElementById("notif");
+        const clock = () => {
+            const date = new Date();
+            let hours = date.getHours();
+            let minutes = date.getMinutes();
+            let seconds = date.getSeconds();
+
+            if(+hours <= 9){
+                hours = '0' + hours;
+            }
+
+            if(+minutes <= 9){
+                minutes = '0' + minutes;
+            }
+
+            if(+seconds <= 9){
+                seconds = '0' + seconds;
+            }
+
+            clockPanel.innerHTML = hours + ':' + minutes + ':' + seconds;
+            if(hours < '05'){
+                p.innerHTML = 'Selamat dini hari aura!';
+            }            
+            else if(hours < 10){
+                p.innerHTML = 'Selamat pagi aura!';
+            }
+            else if(hours < 15){
+                p.innerHTML = 'Selamat siang aura!';
+            }
+            else if(hours < 18){
+                p.innerHTML = 'Selamat sore aura!';
+            }
+            else if(hours < 23){
+                p.innerHTML = 'Selamat malam aura!';
+            }
+        }
+
+        setInterval(clock, 1000);
+    </script>
+</body>
+</html>
