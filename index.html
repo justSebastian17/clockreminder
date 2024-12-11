@@ -27,13 +27,29 @@
             font-size: 80px;
         }
 
+        .fade-in-toggle {
+            animation: fadeInAnimation ease 6s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes fadeInAnimation {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
     </style>
 </head>
 <body>    
     <div class="centerDiv">
         <div class="lingkaran1">
             <h1 id="clockPanel" class="clockPanel"></h1>
-            <p id="notif" style="font-size: 30px;"></p>    
+            <p id="notif" style="font-size: 40px;"></p>    
         </div>
     </div>	
     <script language="javascript" type="text/javascript">
