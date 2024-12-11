@@ -10,7 +10,7 @@
             display: flex; /* Aktifkan Flexbox */
             justify-content: center; /* Pusatkan horizontal */
             align-items: center; /* Pusatkan vertikal */
-            background-color: #f0f0f0; /* Latar belakang tambahan */
+            /*background-color: #f0f0f0; */ /* Latar belakang tambahan */
         }
         .lingkaran1{
             width: 450px;
@@ -21,7 +21,7 @@
             flex-direction: column;
             background: #dac52c;
             border-radius: 100%;            
-        }
+        }               
     </style>
 </head>
 <body>    
@@ -34,11 +34,13 @@
     <script language="javascript" type="text/javascript">
         const clockPanel = document.getElementById("clockPanel");
         const p = document.getElementById("notif");
+        const body = document.body;
+        body.style.backgroundSize = "cover";
         const clock = () => {
             const date = new Date();
             let hours = date.getHours();
             let minutes = date.getMinutes();
-            let seconds = date.getSeconds();
+            let seconds = date.getSeconds();            
 
             if(+hours <= 9){
                 hours = '0' + hours;
@@ -55,18 +57,23 @@
             clockPanel.innerHTML = hours + ':' + minutes + ':' + seconds;
             if(hours < '05'){
                 p.innerHTML = 'Selamat dini hari aura!';
+                body.style.backgroundImage = "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg')";
             }            
             else if(hours < 10){
                 p.innerHTML = 'Selamat pagi aura!';
+                body.style.backgroundImage = "url('img/Pagi.png')";
             }
             else if(hours < 15){
                 p.innerHTML = 'Selamat siang aura!';
+                body.style.backgroundImage = "url('img/Siang.gif')";
             }
             else if(hours < 18){
                 p.innerHTML = 'Selamat sore aura!';
+                body.style.backgroundImage = "url('img/Sore.png')";
             }
             else if(hours <= 23){
                 p.innerHTML = 'Selamat malam aura!';
+                body.style.backgroundImage = "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg')";                
             }
         }
 
