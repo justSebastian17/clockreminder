@@ -8,6 +8,17 @@
             margin: 0; /* Hilangkan margin bawaan */
             height: 100vh; /* Tinggi body penuh layar */
             display: flex; /* Aktifkan Flexbox */
+            flex-direction: column;
+            justify-content: center; /* Pusatkan horizontal */
+            align-items: center; /* Pusatkan vertikal */
+            /*background-color: #f0f0f0; */ /* Latar belakang tambahan */
+        }
+
+        .centerDiv2 {
+            margin: 0; /* Hilangkan margin bawaan */
+            height: 100vh; /* Tinggi body penuh layar */
+            display: flex; /* Aktifkan Flexbox */
+            flex-direction: column;
             justify-content: center; /* Pusatkan horizontal */
             align-items: center; /* Pusatkan vertikal */
             /*background-color: #f0f0f0; */ /* Latar belakang tambahan */
@@ -43,6 +54,20 @@
             }
         }
 
+        .kotak {
+            width: 450px;
+            height: 450px;
+            background-color: burlywood;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .kotak img {
+            width: 25%;
+            margin-top: -200px;
+        }
+
     </style>
 </head>
 <body class="fade-in-toggle">    
@@ -51,11 +76,18 @@
             <h1 id="clockPanel" class="clockPanel"></h1>
             <p id="notif" style="font-size: 40px;"></p>    
         </div>
+    </div>
+    <div class="centerDiv2">
+        <div class="kotak">
+            <img id="imgCuaca">
+        </div>
     </div>	
     <script language="javascript" type="text/javascript">
         const clockPanel = document.getElementById("clockPanel");
         const p = document.getElementById("notif");
         const body = document.body;
+        let cuacaList;
+        const imgCuaca = document.getElementById("imgCuaca");
         body.style.backgroundSize = "cover";
         const clock = () => {
             const date = new Date();
@@ -98,7 +130,28 @@
             }
         }
 
+        const getData = () => {
+            // Set the API endpoint and parameters
+            const apiUrl = 'https://api.bmkg.go.id/publik/prakiraan-cuaca';
+            const kodeWilayahTingkatIV = '34.71.09.1001'; // Replace with your desired kecamatan code
+
+            // Make the GET request
+            fetch(`${apiUrl}?adm4=${kodeWilayahTingkatIV}`)
+            .then(response => response.json())
+            .then(data => {
+                // Process the data
+                cuacaList = data.data[0].cuaca[data.data[0].cuaca.length - 1][0]; 
+                console.log(cuacaList)               
+                let insertImgCuaca = document.createAttribute("src");
+                const pmUrl = cuacaList.image.replace(/-am\.svg$/, '-pm.svg');
+                insertImgCuaca.value = pmUrl;
+                imgCuaca.setAttributeNode(insertImgCuaca);
+            })
+            .catch(error => console.error(error));              
+        }
+
         setInterval(clock, 1000);
+        getData();
     </script>
 </body>
 </html>
