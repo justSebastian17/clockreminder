@@ -12,22 +12,8 @@
             justify-content: center; /* Pusatkan horizontal */
             align-items: center; /* Pusatkan vertikal */
             /*background-color: #f0f0f0; */ /* Latar belakang tambahan */
-        }
-        .lingkaran1{
-            width: 450px;
-            height: 450px;
-            align-items: center;
-            justify-content: center;
-            display: flex;
-            flex-direction: column;
-            background: #dac52c;
-            border-radius: 100%;            
-        }    
-        
-        .clockPanel {
-            font-size: 80px;
-        }
-
+        }          
+                
         .fade-in-toggle {
             animation: fadeInAnimation ease 6s;
             animation-iteration-count: 1;
@@ -50,11 +36,43 @@
                 text-align: center; /* Pusatkan teks */
                 padding: 10px; /* Tambahkan ruang agar lebih rapi */
             }
+            .lingkaran1{
+                width: 250px;
+                height: 250px;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+                background: #dac52c;
+                border-radius: 100%;            
+            } 
+            .clockPanel {
+                font-size: 40px;
+            }
+            #KlikPlayButton{
+                font-size: 15px;
+            }
         }
 
         @media screen and (min-width: 601px) and (max-width: 1920px) { 
             #notif {
                 font-size: 40px; /* Ukuran menengah untuk tablet */
+            }
+            .lingkaran1{
+                width: 450px;
+                height: 450px;
+                align-items: center;
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+                background: #dac52c;
+                border-radius: 100%;            
+            } 
+            .clockPanel {
+                font-size: 80px;
+            }
+            #KlikPlayButton{
+                font-size: 28px;
             }
         }
 
