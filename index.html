@@ -72,7 +72,7 @@
                 font-size: 80px;
             }
             #KlikPlayButton{
-                font-size: 28px;
+                font-size: 20px;
             }
         }
 
@@ -85,7 +85,7 @@
             <h1 id="clockPanel" class="clockPanel"></h1>
             <p id="notif"></p>    
         </div>
-        <iframe id="soundcloud-player" style="visibility: hidden;" width="1" height="1" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1781315529&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/m-afan-aris" title="M. Afan Aris" target="_blank" style="color: #cccccc; text-decoration: none;"></a><a href="https://soundcloud.com/m-afan-aris/aku-jeje-tenang" title="Aku Jeje - Tenang" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>
+        <iframe id="soundcloud-player" style="visibility: hidden;" width="1" height="1" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/m-afan-aris" title="M. Afan Aris" target="_blank" style="color: #cccccc; text-decoration: none;"></a><a href="https://soundcloud.com/m-afan-aris/aku-jeje-tenang" title="Aku Jeje - Tenang" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>
     </div>	
     <script src="https://w.soundcloud.com/player/api.js"></script>
     <script language="javascript" type="text/javascript">
@@ -93,8 +93,25 @@
         const p = document.getElementById("notif");
         const body = document.body;
         body.style.backgroundSize = "cover";
-        var iframe = document.getElementById("soundcloud-player");
-        var widget = SC.Widget(iframe);
+        var iframe = document.getElementById("soundcloud-player");        
+        var arrMusic = [
+            {
+                name: 'The 1975 - About You',
+                url:'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1386124174&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'
+            },
+            {
+                name: 'Aku Jeje - Tenang',
+                url:'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1781315529&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'
+            },
+            {
+                name:'Artic Monkey - Party Anthem',
+                url:'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/1938164603&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'
+            },
+            {
+                name:'Jason Ranti - Lagunya Begini Nadanya Begitu',
+                url:'https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/811123969&color=%23ff5500&auto_play=true&hide_related=false&show_comments=true&show_user=true&show_reposts=false&show_teaser=true&visual=true'
+            }
+        ]
         const clock = () => {
             const date = new Date();
             let hours = date.getHours();
@@ -136,11 +153,15 @@
             }
         }                
         document.body.addEventListener("click", function() {
-            let KlikPlayButton = document.getElementById('KlikPlayButton');
-            widget.play();
+            let randomIndex = Math.floor(Math.random() * arrMusic.length);
+            let KlikPlayButton = document.getElementById('KlikPlayButton');            
             let iframe = document.querySelector("iframe");
-            iframe.src = iframe.src; // Refresh iframe untuk memulai ulang
+            iframe.src = arrMusic[randomIndex].url; // Refresh iframe untuk memulai ulang
             KlikPlayButton.innerHTML = "";
+            setTimeout(function(){
+                KlikPlayButton.innerHTML = "Ini Judul lagunya " +  arrMusic[randomIndex].name;
+            },7000);
+            
         },{ once: true });// sekali klik saja
 
         setInterval(clock, 1000);
