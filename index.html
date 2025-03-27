@@ -157,6 +157,11 @@
             let KlikPlayButton = document.getElementById('KlikPlayButton');            
             let iframe = document.querySelector("iframe");
             iframe.src = arrMusic[randomIndex].url; // Refresh iframe untuk memulai ulang
+            let widget = SC.Widget(iframe);
+            setTimeout(function(){
+                widget.play();
+            },2000);
+            
             KlikPlayButton.innerHTML = "";
             setTimeout(function(){
                 KlikPlayButton.innerHTML = "Ini Judul lagunya " +  arrMusic[randomIndex].name;
