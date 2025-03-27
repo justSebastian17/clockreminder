@@ -85,7 +85,7 @@
             <h1 id="clockPanel" class="clockPanel"></h1>
             <p id="notif"></p>    
         </div>
-        <iframe id="soundcloud-player" style="visibility: hidden;" width="1" height="1" scrolling="no" frameborder="no" allow="autoplay" src=""></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/m-afan-aris" title="M. Afan Aris" target="_blank" style="color: #cccccc; text-decoration: none;"></a><a href="https://soundcloud.com/m-afan-aris/aku-jeje-tenang" title="Aku Jeje - Tenang" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>
+        <iframe id="soundcloud-player" style="visibility: hidden;" width="1" height="1" scrolling="no" frameborder="no" allow="autoplay" src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/genma-muro/sets/raa&color=%23ff5500&auto_play=false"></iframe><div style="font-size: 10px; color: #cccccc;line-break: anywhere;word-break: normal;overflow: hidden;white-space: nowrap;text-overflow: ellipsis; font-family: Interstate,Lucida Grande,Lucida Sans Unicode,Lucida Sans,Garuda,Verdana,Tahoma,sans-serif;font-weight: 100;"><a href="https://soundcloud.com/m-afan-aris" title="M. Afan Aris" target="_blank" style="color: #cccccc; text-decoration: none;"></a><a href="https://soundcloud.com/m-afan-aris/aku-jeje-tenang" title="Aku Jeje - Tenang" target="_blank" style="color: #cccccc; text-decoration: none;"></a></div>
     </div>	
     <script src="https://w.soundcloud.com/player/api.js"></script>
     <script language="javascript" type="text/javascript">
@@ -151,23 +151,30 @@
                 p.innerHTML = 'Selamat malam aura!';
                 body.style.backgroundImage = "url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg')";                
             }
-        }                
-        document.body.addEventListener("click", function() {
-            let randomIndex = Math.floor(Math.random() * arrMusic.length);
+        }                        
+
+        document.body.addEventListener("click", function() {            
             let KlikPlayButton = document.getElementById('KlikPlayButton');            
             let iframe = document.querySelector("iframe");
-            iframe.src = arrMusic[randomIndex].url; // Refresh iframe untuk memulai ulang
             let widget = SC.Widget(iframe);
-            setTimeout(function(){
-                widget.play();
-            },2000);
-            
-            KlikPlayButton.innerHTML = "";
-            setTimeout(function(){
-                KlikPlayButton.innerHTML = "Ini Judul lagunya " +  arrMusic[randomIndex].name;
-            },7000);
-            
-        },{ once: true });// sekali klik saja
+
+            widget.bind(SC.Widget.Events.READY, function(){
+                widget.getSounds((sounds) =>{
+                    if(sounds.length > 0){
+                        let randomIndex = Math.floor(Math.random() * sounds.length);
+                        widget.skip(randomIndex);
+                        setTimeout(function(){
+                            widget.play();
+                        },2000);
+                        KlikPlayButton.innerHTML = "";
+                        setTimeout(function(){
+                            KlikPlayButton.innerHTML = "Ini Judul lagunya " +  sounds[randomIndex].title;
+                        },5000);                        
+                    }
+                })
+            });
+
+        },{ once: true });
 
         setInterval(clock, 1000);
     </script>
